@@ -1,0 +1,14 @@
+{
+  "workbench.colorTheme": "Monokai Dimmed",
+  "workbench.panel.defaultLocation": "bottom",
+  "window.zoomLevel": 0,
+  "git.ignoreMissingGitWarning": true,
+  "editor.renderWhitespace": "all",
+  "workbench.activityBar.visible": true,
+  "workbench.sideBar.location": "right",
+  "editor.renderControlCharacters": false,
+  "breadcrumbs.enabled": true,
+  "editor.tabSize": 2,
+  "terminal.integrated.shell.osx": "/bin/bash",
+  "eslint.alwaysShowStatus": true
+}

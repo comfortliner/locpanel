@@ -1,0 +1,9 @@
+# node
+package-lock.json
+node_modules/
+
+# OS generated files and folders
+.DS_Store
+
+.env
+dist/

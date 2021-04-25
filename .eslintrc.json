@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true
+  },
+  "extends": "es/node",
+  "rules": {
+    "camelcase": "off",
+    "capitalized-comments": "off",
+    "new-cap": "off",
+    "no-process-env": "off",
+    "unicorn/catch-error-name": "off",
+    "unicorn/numeric-separators-style": "off",
+    "sort-imports": "off"
+  },
+  "parserOptions": {
+    // "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "globals": {
+    "dhx": "readonly",
+    "dhtmlx": "readonly",
+    "window": "readonly"
+  }
+}

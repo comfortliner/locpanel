@@ -1,0 +1,20 @@
+extends layout
+
+block body
+
+  header.site-header
+    div.site-header__wrapper
+      a.greyheading(href="/") scrumblr
+
+  div.board-wrapper
+    div.board-outline(style="clear:both;")
+      div#board
+        div#board-doodles
+        image#marker(src='images/marker.png')
+        image#eraser(src='images/eraser.png')
+
+        table#board-table.board-table
+          tr
+            td#icon-col(width='1%')
+  div
+    button#resetCards Reset cards on this board
