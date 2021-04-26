@@ -1,18 +1,13 @@
 {
   "name": "locpanel",
   "version": "0.0.1",
-  "description": "Forked from aliasaria/scrumblr. Used as a magnet board for showing the presence of our employees (locationpanel).",
-  "repository": {
-    "url": "http://github.com/comfortliner/locpanel"
-  },
+  "description": "Forked from aliasaria/scrumblr. Used as a magnet board for showing the presence status (locationpanel).",
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon app.js",
     "start": "node app.js"
   },
-  "keywords": [],
   "author": "comfortliner",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "1.19.0",
     "compression": "1.7.4",
@@ -31,5 +26,13 @@
     "eslint-config-es": "3.27.6",
     "nodemon": "2.0.7",
     "prettier": "2.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/comfortliner/locpanel.git"
+  },
+  "keywords": [
+    "electronic", "magnetboard", "location", "panel"
+  ],
+  "license": "GPLv3"
 }
