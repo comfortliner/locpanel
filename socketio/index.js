@@ -1,5 +1,7 @@
 'use strict';
 
+const debug = require('debug')('app:socketio:index');
+
 const initClient = require('./initClient'),
       joinRoom = require('./joinRoom'),
       moveCard = require('./moveCard'),
@@ -15,8 +17,7 @@ const initializeIOServer = server => {
     socket.on('message', message => {
       const { action, data } = message;
 
-      // eslint-disable-next-line no-console
-      console.log(`From Client: action:${action}, data:${data}`);
+      debug(`From Client: action:${action}, %j`, data);
 
       if (!action) {
         return false;
@@ -50,15 +51,13 @@ const initializeIOServer = server => {
           break;
 
         default:
-          // eslint-disable-next-line no-console
-          console.log(`Unknown action ${action}`);
+          debug(`Unknown action ${action}`);
           break;
       }
     });
 
     socket.on('disconnect', () => {
-      // eslint-disable-next-line no-console
-      console.log('Client disconnected');
+      debug('Client disconnected');
     });
   });
 

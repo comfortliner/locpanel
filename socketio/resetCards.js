@@ -1,5 +1,7 @@
 'use strict';
 
+const debug = require('debug')('app:socketio:resetCards');
+
 const controllers = require('./../controllers'),
       db = require('./../models');
 
@@ -71,8 +73,7 @@ const writeToDB = async data => {
       }
     });
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error.message);
+    debug(error.message);
   }
 };
 

@@ -1,5 +1,7 @@
 'use strict';
 
+const debug = require('debug')('app:socketio:initClient');
+
 const controllers = require('../controllers'),
       db = require('../models');
 
@@ -46,8 +48,7 @@ const getInitColumns = async data => {
 };
 
 const initClient = (client, data) => {
-  // eslint-disable-next-line no-console
-  console.log('initClient Started');
+  debug('initClient Started');
 
   getInitCards(data).then(result => {
     client.emit('message', { action: 'initCards', data: result });

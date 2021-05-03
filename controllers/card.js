@@ -24,7 +24,7 @@ const findAll = async (db, filter) => {
     return result;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('Something went wrong in card.findAll.', JSON.stringify(error.message));
+    console.log(`${new Date().toISOString()} Something went wrong in card.findAll. ${JSON.stringify(error.message)}`);
   }
 };
 
@@ -48,7 +48,7 @@ const setXy = async (db, data) => {
     });
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('Something went wrong in card.setXy.', JSON.stringify(error.message));
+    console.log(`${new Date().toISOString()} Something went wrong in card.setXy. ${JSON.stringify(error.message)}`);
   }
 };
 

@@ -7,10 +7,10 @@ It was inspired by [scrumblr from aliasaria](https://github.com/aliasaria/scrumb
 Some other functions have been added
 
 * sqlite or mssql as database
-* frontend separated from backend (todo)
-* admin area for backend
 * UI in read only mode. All boards, labeling and cards are specified via an admin area.
-* User authentication and authorization. Only users with card can access the board.
+* (todo) frontend separated from backend
+* (todo) admin area for backend
+* (todo) User authentication and authorization. Only users with card can access the board.
 
 
 ## Getting Started

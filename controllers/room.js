@@ -24,7 +24,7 @@ const findOne = async (db, filter) => {
     return result.dataValues;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('Something went wrong in room.findOne.', JSON.stringify(error.message));
+    console.log(`${new Date().toISOString()} Something went wrong in room.findOne. ${JSON.stringify(error.message)}`);
   }
 };
 

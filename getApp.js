@@ -34,7 +34,7 @@ const getApp = function () {
   app.use(compression());
 
   app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Homepage locpanel<br><br>tbd...');
   });
 
   // app.use('/api', routes.api);

@@ -28,7 +28,7 @@ const sendAction = (action, data) => {
   const newData = Object.assign(thisData, defaultKeyValue);
 
   // eslint-disable-next-line no-console
-  console.log(`To Server --> ${action}, ${JSON.stringify(newData)}`);
+  console.log(`${new Date().toISOString()} To Server --> ${action}, ${JSON.stringify(newData)}`);
 
   const message = {
     action,
@@ -276,7 +276,7 @@ const getMessage = message => {
   const { action, data } = message;
 
   // eslint-disable-next-line no-console
-  console.log(`<-- From Server ${action}, ${JSON.stringify(data)}`);
+  console.log(`${new Date().toISOString()} <-- From Server ${action}, ${JSON.stringify(data)}`);
 
   switch (action) {
     case 'roomAccept':
@@ -293,7 +293,7 @@ const getMessage = message => {
       break;
     default:
       // eslint-disable-next-line no-console
-      console.log(`Unknown action: ${action}`);
+      console.log(`${new Date().toISOString()} Unknown action: ${action}`);
       break;
   }
 };

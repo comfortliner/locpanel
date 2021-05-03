@@ -2,12 +2,12 @@
 
 module.exports = {
   development: {
-    username: 'sa',
-    password: 'P@55w0rd',
-    database: 'locpanel',
+    username: 'YOUR-USERNAME',
+    password: 'YOUR-PASSWORD',
+    database: 'YOUR-DATABASE-NAME',
     dialect: 'mssql',
     dialectOptions: {
-      server: 'localhost',
+      server: 'YOUR-HOST-NAME',
       options: {}
     },
     logging: console.log
@@ -24,12 +24,12 @@ module.exports = {
     logging: console.log
   },
   production: {
-    username: 'sa',
-    password: 'P@55w0rd',
-    database: 'locpanel',
+    username: '',
+    password: '',
+    database: '',
     dialect: 'mssql',
     dialectOptions: {
-      server: 'localhost',
+      server: '',
       options: {}
     },
     logging: false

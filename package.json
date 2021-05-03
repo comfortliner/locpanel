@@ -4,14 +4,15 @@
   "description": "Forked from aliasaria/scrumblr. Used as a magnet board for showing the presence status (locationpanel).",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon app.js",
-    "start": "node app.js"
+    "start:dev": "DEBUG=app*,sequelize:sql* nodemon -r dotenv/config app.js",
+    "start": "node -r dotenv/config app.js"
   },
   "author": "comfortliner",
   "dependencies": {
     "body-parser": "1.19.0",
     "compression": "1.7.4",
     "cors": "2.8.5",
+    "debug": "4.3.1",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "pug": "3.0.2",
@@ -19,7 +20,8 @@
     "sanitize-html": "2.3.3",
     "sequelize": "5.22.3",
     "socket.io": "4.0.1",
-    "sqlite3": "5.0.2"
+    "sqlite3": "5.0.2",
+    "tedious": "11.0.7"
   },
   "devDependencies": {
     "eslint": "7.18.0",
@@ -32,7 +34,10 @@
     "url": "git://github.com/comfortliner/locpanel.git"
   },
   "keywords": [
-    "electronic", "magnetboard", "location", "panel"
+    "electronic",
+    "magnetboard",
+    "location",
+    "panel"
   ],
   "license": "GPLv3"
 }

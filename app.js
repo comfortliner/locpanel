@@ -1,7 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-
 const http = require('http');
 
 const sanitizeHtml = require('sanitize-html');
@@ -11,7 +9,7 @@ const getApp = require('./getApp'),
 
 const app = getApp();
 
-const { PORT } = process.env;
+const { NODE_ENV, PORT } = process.env;
 
 const server = http.createServer(app);
 
@@ -33,5 +31,5 @@ socketio(server);
 
 server.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`${new Date().toISOString()} Server is listening in ${NODE_ENV} on port ${PORT}`);
 });
