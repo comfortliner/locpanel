@@ -1,7 +1,5 @@
 'use strict';
 
-const debug = require('debug')('app:socketio:resetCards');
-
 const controllers = require('./../controllers'),
       db = require('./../models');
 
@@ -32,13 +30,14 @@ const getCardsAfterReset = async data => {
 const writeToDB = async data => {
   const distanceToNextCardinXaxis = 80,
         distanceToNextCardinYaxis = 50,
+        { room, selectedDoW } = data,
         filter = {
           attributes: [ 'id', 'x', 'y' ],
           include: [{
             model: db.Room,
             attributes: [ 'name' ],
             where: {
-              name: data.room
+              name: room
             }
           }],
           where: {
@@ -61,7 +60,8 @@ const writeToDB = async data => {
         position: {
           top: 50 + (counterYaxis * distanceToNextCardinYaxis),
           left: offsetLeft + (counterXaxis * distanceToNextCardinXaxis)
-        }
+        },
+        selectedDoW
       };
 
       controllers.card.setXy(db, newPosition);
@@ -73,14 +73,16 @@ const writeToDB = async data => {
       }
     });
   } catch (error) {
-    debug(error.message);
+    // eslint-disable-next-line no-console
+    console.log(error.message);
   }
 };
 
 const resetCards = async (data, callback) => {
   await writeToDB(data);
+  const resetPosition = await getCardsAfterReset(data);
 
-  callback(await getCardsAfterReset(data));
+  callback(resetPosition);
 };
 
 module.exports = resetCards;

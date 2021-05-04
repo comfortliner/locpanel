@@ -7,7 +7,8 @@ const moveCard = (socket, data) => {
     position: {
       left: data.position.left,
       top: data.position.top
-    }
+    },
+    selectedDoW: data.selectedDoW
   };
 
   return message_out;

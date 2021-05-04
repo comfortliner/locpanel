@@ -6,7 +6,8 @@ const compression = require('compression'),
       cors = require('cors'),
       express = require('express');
 
-const { authUser, hasCardOnLocpanel } = require('./basicAuth');
+const { authUser, hasCardOnLocpanel } = require('./basicAuth'),
+      { getarrDoW } = require('./utils');
 
 // const routes = require('./routes');
 
@@ -40,9 +41,19 @@ const getApp = function () {
   // app.use('/api', routes.api);
 
   app.get('/:id', authUser, hasCardOnLocpanel, (req, res) => {
-    res.render('index', {
-      pageTitle: `locpanel - ${req.params.id}`
-    });
+    const pageLocals = {};
+    let { selectedDoW } = req.query;
+
+    if (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5) {
+      selectedDoW = new Date().getDay();
+    }
+
+    pageLocals.pageTitle = `locpanel - ${req.params.id}`;
+    pageLocals.room = req.params.id;
+    pageLocals.selectedDoW = selectedDoW;
+    pageLocals.getarrDoW = getarrDoW;
+
+    res.render('index', pageLocals);
   });
 
   return app;

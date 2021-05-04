@@ -160,3 +160,47 @@ b {
   position: absolute; bottom: 0; right: 70px;
   z-index: 1;
 }
+
+#a-dow-cell-selected {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#a-dow-cell-notselected {
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#table-dow table {
+  table-layout: fixed;
+}
+
+#table-dow td {
+  font-family:  "Helvetica Neue Light", "HelveticaNeue-Light", 'Helvetica Neue', arial, serif;
+  font-size: 1.2em;
+  overflow: hidden;
+  padding: 3px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 175px;
+}
+
+#table-dow-cell-selected {
+  background-color: green;
+  color: white;
+}
+
+#table-dow-cell-current {
+  background-color: blue;
+  color: white;
+}
+
+#table-dow-cell-disabled {
+  background-color: #bcbcbc;
+  color: black;
+}

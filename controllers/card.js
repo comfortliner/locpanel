@@ -40,8 +40,13 @@ const setXy = async (db, data) => {
   const { id, position } = data,
         { top, left } = position;
 
+  let { selectedDoW } = data;
+
+  const key1 = `x${selectedDoW === 1 ? selectedDoW = '' : selectedDoW}`,
+        key2 = `y${selectedDoW === 1 ? selectedDoW = '' : selectedDoW}`;
+
   try {
-    await db.Card.update({ x: left, y: top }, {
+    await db.Card.update({ [key1]: left, [key2]: top }, {
       where: {
         id
       }

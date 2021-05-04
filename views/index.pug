@@ -1,12 +1,43 @@
 extends layout
 
 block body
+  - let arrDoW = locals.getarrDoW();
+  - let actualDoW = new Date().getDay();
 
   header.site-header
     div.site-header__wrapper
       a.greyheading(href="/") locpanel forked from scrumblr
 
+  p
+
   div.board-wrapper
+    table#table-dow
+      tr
+        each val, index in arrDoW
+          if index >= actualDoW
+            if val == "Heute"
+              td#table-dow-cell-current= val
+            else
+              td= val
+          else
+            td#table-dow-cell-disabled= ""
+      tr
+        td#table-dow-cell-disabled= "Sonntag"
+        each val, index in ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"]
+          if locals.selectedDoW == index + 1
+            td#table-dow-cell-selected
+              a#a-dow-cell-selected(href=locals.room + "?selectedDoW=" + ( index + 1))= val
+          else
+            td
+              a#a-dow-cell-notselected(href=locals.room + "?selectedDoW=" + ( index + 1))= val
+        td#table-dow-cell-disabled= "Samstag"
+      tr
+        each val, index in arrDoW
+          if index < actualDoW
+            td= val
+          else
+            td#table-dow-cell-disabled= ""
+
     div.board-outline(style="clear:both;")
       div#board
         div#board-doodles

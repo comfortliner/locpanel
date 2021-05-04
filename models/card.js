@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       field: 'isAdmin',
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: 'true'
+      defaultValue: 'false'
     },
     KID: {
       field: 'KID',
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       field: 'text',
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'No Value'
+      defaultValue: ''
     },
     x: {
       field: 'x',
@@ -91,12 +91,14 @@ module.exports = (sequelize, DataTypes) => {
     rot: {
       field: 'rot',
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     },
     colour: {
       field: 'colour',
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'white'
     }
   }, {
     freezeTableName: true,

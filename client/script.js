@@ -1,13 +1,25 @@
 'use strict';
 
-let boardInitialized = false;
-
-// let cards = {};
-// let columns = [];
-let keyTrap = null;
-let totalcolumns = 0;
+let boardInitialized = false,
+    keyTrap = null,
+    totalcolumns = 0;
 
 const baseurl = location.pathname;
+
+const getQueryStringValue = key => decodeURIComponent(window.location.search.replace(
+  new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'
+));
+
+const getSelectedDoW = () => {
+  // return 1 if mode !== Multi_DoW
+  let selectedDoWThisClient = Number.parseInt(getQueryStringValue('selectedDoW'), 10);
+
+  if (Number.isNaN(selectedDoWThisClient) || Number.parseInt(selectedDoWThisClient, 10) < 1 || Number.parseInt(selectedDoWThisClient, 10) > 5) {
+    selectedDoWThisClient = new Date().getDay();
+  }
+
+  return selectedDoWThisClient;
+};
 
 // eslint-disable-next-line no-undef
 const socket = io.connect();
@@ -16,7 +28,8 @@ const sendAction = (action, data) => {
   const defaultKeyValue = {
     room: baseurl,
     boardwidth: $('.board-outline').width(),
-    colcount: $('.col').length
+    colcount: $('.col').length,
+    selectedDoW: getSelectedDoW()
   };
 
   let thisData = data;
@@ -62,14 +75,16 @@ const blockUI = (message = 'Waiting...') => {
   });
 };
 
-const moveCard = (card, position) => {
-  card.animate(
-    {
-      left: `${position.left}px`,
-      top: `${position.top}px`
-    },
-    500
-  );
+const moveCard = (card, position, selectedDoW) => {
+  if (selectedDoW === getSelectedDoW()) {
+    card.animate(
+      {
+        left: `${position.left}px`,
+        top: `${position.top}px`
+      },
+      500
+    );
+  }
 };
 
 $(document).bind('keyup', event => {
@@ -126,7 +141,8 @@ const drawNewCard = (id, text, x, y, rot, colour, animationspeed) => {
     const data = {
       id: this.id,
       position: ui.position,
-      oldposition: ui.originalPosition
+      oldposition: ui.originalPosition,
+      selectedDoW: getSelectedDoW()
     };
 
     sendAction('moveCard', data);
@@ -153,10 +169,10 @@ const drawNewCard = (id, text, x, y, rot, colour, animationspeed) => {
 };
 
 const initCards = cardArray => {
+  const selectedDoW = getSelectedDoW();
+
   // First delete any cards that exist
   $('.card').remove();
-
-  // cards = cardArray;
 
   for (const card in cardArray) {
     if (Object.prototype.hasOwnProperty.call(cardArray, card)) {
@@ -165,8 +181,8 @@ const initCards = cardArray => {
       drawNewCard(
         newCard.id,
         newCard.text,
-        newCard.x,
-        newCard.y,
+        selectedDoW === 1 ? newCard.x : selectedDoW === 2 ? newCard.x2 : selectedDoW === 3 ? newCard.x3 : selectedDoW === 4 ? newCard.x4 : selectedDoW === 5 ? newCard.x5 : newCard.x,
+        selectedDoW === 1 ? newCard.y : selectedDoW === 2 ? newCard.y2 : selectedDoW === 3 ? newCard.y3 : selectedDoW === 4 ? newCard.y4 : selectedDoW === 5 ? newCard.y5 : newCard.y,
         newCard.rot,
         newCard.colour,
         250
@@ -289,7 +305,7 @@ const getMessage = message => {
       initColumns(data);
       break;
     case 'moveCard':
-      moveCard($(`#${data.id}`), data.position);
+      moveCard($(`#${data.id}`), data.position, data.selectedDoW);
       break;
     default:
       // eslint-disable-next-line no-console

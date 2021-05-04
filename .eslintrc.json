@@ -12,6 +12,7 @@
     "new-cap": "off",
     "no-process-env": "off",
     "unicorn/catch-error-name": "off",
+    "unicorn/no-nested-ternary": "off",
     "unicorn/numeric-separators-style": "off",
     "sort-imports": "off"
   },
