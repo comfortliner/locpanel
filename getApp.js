@@ -44,9 +44,11 @@ const getApp = function () {
     const pageLocals = {};
 
     let { selectedDoW } = req.query,
-        { PANELMODE } = process.env || 'SINGLE';
+        { PANELMODE } = process.env || 'SINGLE',
+        { NODE_ENV } = process.env;
 
     PANELMODE = PANELMODE.toUpperCase();
+    NODE_ENV = NODE_ENV.toUpperCase();
 
     if (PANELMODE === 'SINGLE') {
       selectedDoW = 1;
@@ -62,6 +64,7 @@ const getApp = function () {
     pageLocals.selectedDoW = selectedDoW;
     pageLocals.getarrDoW = getarrDoW;
     pageLocals.panelMode = PANELMODE;
+    pageLocals.env = NODE_ENV;
 
     res.render('index', pageLocals);
   });

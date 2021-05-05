@@ -45,8 +45,11 @@ const sendAction = (action, data) => {
 
   const newData = Object.assign(thisData, defaultKeyValue);
 
-  // eslint-disable-next-line no-console
-  console.log(`${new Date().toISOString()} To Server --> ${action}, ${JSON.stringify(newData)}`);
+  // eslint-disable-next-line no-undef
+  if (env === 'DEVELOPMENT') {
+    // eslint-disable-next-line no-console
+    console.log(`${new Date().toISOString()} To Server --> ${action}, ${JSON.stringify(newData)}`);
+  }
 
   const message = {
     action,
@@ -296,8 +299,11 @@ const initColumns = columnArray => {
 const getMessage = message => {
   const { action, data } = message;
 
-  // eslint-disable-next-line no-console
-  console.log(`${new Date().toISOString()} <-- From Server ${action}, ${JSON.stringify(data)}`);
+  // eslint-disable-next-line no-undef
+  if (env === 'DEVELOPMENT') {
+    // eslint-disable-next-line no-console
+    console.log(`${new Date().toISOString()} <-- From Server ${action}, ${JSON.stringify(data)}`);
+  }
 
   switch (action) {
     case 'roomAccept':
@@ -313,8 +319,11 @@ const getMessage = message => {
       moveCard($(`#${data.id}`), data.position, data.selectedDoW);
       break;
     default:
-      // eslint-disable-next-line no-console
-      console.log(`${new Date().toISOString()} Unknown action: ${action}`);
+      // eslint-disable-next-line no-undef
+      if (env === 'DEVELOPMENT') {
+        // eslint-disable-next-line no-console
+        console.log(`${new Date().toISOString()} Unknown action: ${action}`);
+      }
       break;
   }
 };
