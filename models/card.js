@@ -26,24 +26,24 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'false'
     },
     KID: {
-      field: 'KID',
+      field: 'idUser',
       type: DataTypes.STRING,
       allowNull: false
     },
     text: {
       field: 'text',
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: ''
     },
-    x: {
-      field: 'x',
+    x1: {
+      field: 'x1',
       type: DataTypes.FLOAT,
       allowNull: false,
       defaultValue: 300
     },
-    y: {
-      field: 'y',
+    y1: {
+      field: 'y1',
       type: DataTypes.FLOAT,
       allowNull: false,
       defaultValue: 300
@@ -102,7 +102,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     freezeTableName: true,
-    tableName: 'tbllocpanelcards',
+    tableName: 'tblLOCPANEL_cards',
     timestamps: false
   });
 

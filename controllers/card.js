@@ -37,13 +37,11 @@ const setXy = async (db, data) => {
     throw new Error('No data to update.');
   }
 
-  const { id, position } = data,
+  const { id, position, selectedDoW } = data,
         { top, left } = position;
 
-  let { selectedDoW } = data;
-
-  const key1 = `x${selectedDoW === 1 ? selectedDoW = '' : selectedDoW}`,
-        key2 = `y${selectedDoW === 1 ? selectedDoW = '' : selectedDoW}`;
+  const key1 = `x${selectedDoW}`,
+        key2 = `y${selectedDoW}`;
 
   try {
     await db.Card.update({ [key1]: left, [key2]: top }, {

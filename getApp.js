@@ -42,9 +42,18 @@ const getApp = function () {
 
   app.get('/:id', authUser, hasCardOnLocpanel, (req, res) => {
     const pageLocals = {};
-    let { selectedDoW } = req.query;
 
-    if (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5) {
+    let { selectedDoW } = req.query,
+        { PANELMODE } = process.env || 'SINGLE';
+
+    PANELMODE = PANELMODE.toUpperCase();
+
+    if (PANELMODE === 'SINGLE') {
+      selectedDoW = 1;
+    }
+
+    if (PANELMODE === 'MULTI' &&
+       (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5)) {
       selectedDoW = new Date().getDay();
     }
 
@@ -52,6 +61,7 @@ const getApp = function () {
     pageLocals.room = req.params.id;
     pageLocals.selectedDoW = selectedDoW;
     pageLocals.getarrDoW = getarrDoW;
+    pageLocals.panelMode = PANELMODE;
 
     res.render('index', pageLocals);
   });

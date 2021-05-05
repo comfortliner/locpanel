@@ -32,7 +32,7 @@ const writeToDB = async data => {
         distanceToNextCardinYaxis = 50,
         { room, selectedDoW } = data,
         filter = {
-          attributes: [ 'id', 'x', 'y' ],
+          attributes: [ 'id', 'x1', 'y1' ],
           include: [{
             model: db.Room,
             attributes: [ 'name' ],

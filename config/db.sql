@@ -4,25 +4,25 @@ GO
 USE locpanel;
 GO
 
-DROP TABLE IF EXISTS tbllocpanelrooms;
-CREATE TABLE tbllocpanelrooms (
+DROP TABLE IF EXISTS tblLOCPANEL_rooms;
+CREATE TABLE tblLOCPANEL_rooms (
     [id] [int] IDENTITY(1,1) PRIMARY KEY CLUSTERED NOT NULL,
     [name] [nvarchar](50) NOT NULL,
     [columns] [nvarchar](255) NOT NULL,
-    INDEX idx_tbllocpanelrooms_name ( [name] )
+    INDEX idx_tblLOCPANEL_rooms_name ( [name] )
 )
 GO
 
-DROP TABLE IF EXISTS tbllocpanelcards;
-CREATE TABLE tbllocpanelcards (
+DROP TABLE IF EXISTS tblLOCPANEL_cards;
+CREATE TABLE tblLOCPANEL_cards (
     [id] [int] IDENTITY(1,1) PRIMARY KEY CLUSTERED NOT NULL,
     [extidroom] [int] NOT NULL,
     [isActive] [bit] NOT NULL,
     [isAdmin] [bit] NOT NULL,
-    [KID] [nvarchar](20) NOT NULL,
+    [idUser] [nvarchar](20) NOT NULL,
     [text] [nvarchar](255),
-    [x] [real] NOT NULL,
-    [y] [real] NOT NULL,
+    [x1] [real] NOT NULL,
+    [y1] [real] NOT NULL,
     [x2] [real],
     [y2] [real],
     [x3] [real],
@@ -33,37 +33,37 @@ CREATE TABLE tbllocpanelcards (
     [y5] [real],
     [rot] [int] NOT NULL,
     [colour] [nvarchar](20) NOT NULL,
-    INDEX idx_tbllocpanelcards_id ( [id] )
+    INDEX idx_tblLOCPANEL_cards_id ( [id] )
 )
 GO
 
-ALTER TABLE tbllocpanelcards WITH CHECK ADD CONSTRAINT [FK_tbllocpanelrooms_id_tbllocpanelcards_extidroom] FOREIGN KEY([extidroom])
-REFERENCES tbllocpanelrooms ([id])
+ALTER TABLE tblLOCPANEL_cards WITH CHECK ADD CONSTRAINT [FK_tblLOCPANEL_rooms_id_tblLOCPANEL_cards_extidroom] FOREIGN KEY([extidroom])
+REFERENCES tblLOCPANEL_rooms ([id])
 ON DELETE CASCADE
 GO
 
-ALTER TABLE tbllocpanelcards ADD CONSTRAINT [DF_tbllocpanelcards_isActive] DEFAULT ((1)) FOR [isActive];
+ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_isActive] DEFAULT ((1)) FOR [isActive];
 GO
 
-ALTER TABLE tbllocpanelcards ADD CONSTRAINT [DF_tbllocpanelcards_isAdmin] DEFAULT ((0)) FOR [isAdmin];
+ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_isAdmin] DEFAULT ((0)) FOR [isAdmin];
 GO
 
-ALTER TABLE tbllocpanelcards ADD CONSTRAINT [DF_tbllocpanelcards_x] DEFAULT ((300.0)) FOR [x];
+ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_x1] DEFAULT ((300.0)) FOR [x1];
 GO
 
-ALTER TABLE tbllocpanelcards ADD CONSTRAINT [DF_tbllocpanelcards_y] DEFAULT ((300.0)) FOR [y];
+ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_y1] DEFAULT ((300.0)) FOR [y1];
 GO
 
-ALTER TABLE tbllocpanelcards ADD CONSTRAINT [DF_tbllocpanelcards_rot] DEFAULT ((0)) FOR [rot];
+ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_rot] DEFAULT ((0)) FOR [rot];
 GO
 
-ALTER TABLE tbllocpanelcards ADD CONSTRAINT [DF_tbllocpanelcards_colour] DEFAULT (('white')) FOR [colour];
+ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_colour] DEFAULT (('white')) FOR [colour];
 GO
 
 
 /* SEEDS */
-INSERT INTO tbllocpanelrooms ([name], [columns]) VALUES ('/abcdef', 'Location 1, Location 2, Location 3, Out of Order');
+INSERT INTO tblLOCPANEL_rooms ([name], [columns]) VALUES ('/abcdef', 'Location 1, Location 2, Location 3, Out of Order');
 
-INSERT INTO tbllocpanelcards ([extidroom], [KID], [text], [x], [y], [rot], [colour]) VALUES (1, '1234', '<b>1234</b>', 250.0, 250.0, -1, 'yellow');
-INSERT INTO tbllocpanelcards ([extidroom], [KID], [text], [x], [y], [rot], [colour]) VALUES (1, '2345', '<b>2345</b>', 300.0, 300.0, 0, 'white');
-INSERT INTO tbllocpanelcards ([extidroom], [KID], [text], [x], [y], [rot], [colour]) VALUES (1, '3456', '<b>3456</b>', 350.0, 350.0, 1, 'green');
+INSERT INTO tblLOCPANEL_cards ([extidroom], [idUser], [text], [x1], [y1], [rot], [colour]) VALUES (1, '1234', '<b>1234</b>', 250.0, 250.0, -1, 'yellow');
+INSERT INTO tblLOCPANEL_cards ([extidroom], [idUser], [text], [x1], [y1], [rot], [colour]) VALUES (1, '2345', '<b>2345</b>', 300.0, 300.0, 0, 'white');
+INSERT INTO tblLOCPANEL_cards ([extidroom], [idUser], [text], [x1], [y1], [rot], [colour]) VALUES (1, '3456', '<b>3456</b>', 350.0, 350.0, 1, 'green');

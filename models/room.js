@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     freezeTableName: true,
-    tableName: 'tbllocpanelrooms',
+    tableName: 'tblLOCPANEL_rooms',
     timestamps: false
   });
 

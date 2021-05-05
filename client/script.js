@@ -7,11 +7,16 @@ let boardInitialized = false,
 const baseurl = location.pathname;
 
 const getQueryStringValue = key => decodeURIComponent(window.location.search.replace(
+  // eslint-disable-next-line require-unicode-regexp, prefer-template, unicorn/better-regex, no-useless-escape
   new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'
 ));
 
 const getSelectedDoW = () => {
-  // return 1 if mode !== Multi_DoW
+  // eslint-disable-next-line no-undef
+  if (panelMode !== 'MULTI') {
+    return 1;
+  }
+
   let selectedDoWThisClient = Number.parseInt(getQueryStringValue('selectedDoW'), 10);
 
   if (Number.isNaN(selectedDoWThisClient) || Number.parseInt(selectedDoWThisClient, 10) < 1 || Number.parseInt(selectedDoWThisClient, 10) > 5) {
@@ -181,8 +186,8 @@ const initCards = cardArray => {
       drawNewCard(
         newCard.id,
         newCard.text,
-        selectedDoW === 1 ? newCard.x : selectedDoW === 2 ? newCard.x2 : selectedDoW === 3 ? newCard.x3 : selectedDoW === 4 ? newCard.x4 : selectedDoW === 5 ? newCard.x5 : newCard.x,
-        selectedDoW === 1 ? newCard.y : selectedDoW === 2 ? newCard.y2 : selectedDoW === 3 ? newCard.y3 : selectedDoW === 4 ? newCard.y4 : selectedDoW === 5 ? newCard.y5 : newCard.y,
+        selectedDoW === 1 ? newCard.x1 : selectedDoW === 2 ? newCard.x2 : selectedDoW === 3 ? newCard.x3 : selectedDoW === 4 ? newCard.x4 : selectedDoW === 5 ? newCard.x5 : newCard.x1,
+        selectedDoW === 1 ? newCard.y1 : selectedDoW === 2 ? newCard.y2 : selectedDoW === 3 ? newCard.y3 : selectedDoW === 4 ? newCard.y4 : selectedDoW === 5 ? newCard.y5 : newCard.y1,
         newCard.rot,
         newCard.colour,
         250
