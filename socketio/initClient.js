@@ -7,7 +7,7 @@ const controllers = require('../controllers'),
 
 const getInitCards = async data => {
   const filter = {
-    attributes: { exclude: [ 'extidroom', 'isActive', 'isAdmin', 'KID' ]},
+    attributes: { exclude: [ 'extidroom', 'isActive', 'isAdmin', 'idUser' ]},
     include: [{
       model: db.Room,
       attributes: [ 'name' ],

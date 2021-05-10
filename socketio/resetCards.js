@@ -3,14 +3,14 @@
 const controllers = require('./../controllers'),
       db = require('./../models');
 
-const getCardsAfterReset = async data => {
+const getCardsAfterReset = async room => {
   const filter = {
-    attributes: { exclude: [ 'extidroom', 'isActive', 'isAdmin', 'KID' ]},
+    attributes: { exclude: [ 'extidroom', 'isActive', 'isAdmin', 'idUser' ]},
     include: [{
       model: db.Room,
       attributes: [ 'name' ],
       where: {
-        name: data.room
+        name: room
       }
     }],
     where: {
@@ -30,9 +30,9 @@ const getCardsAfterReset = async data => {
 const writeToDB = async data => {
   const distanceToNextCardinXaxis = 80,
         distanceToNextCardinYaxis = 50,
-        { room, selectedDoW } = data,
+        { room, selectedDoW, boardwidth, colcount } = data,
         filter = {
-          attributes: [ 'id', 'x1', 'y1' ],
+          attributes: [ 'id' ],
           include: [{
             model: db.Room,
             attributes: [ 'name' ],
@@ -45,8 +45,8 @@ const writeToDB = async data => {
           },
           raw: true
         },
-        maxCardsinXaxis = 4,
-        offsetLeft = 940;
+        maxCardsinXaxis = Math.round((boardwidth / colcount) / 80),
+        offsetLeft = ((boardwidth / colcount) * (colcount - 1)) - 30;
 
   let counterXaxis = 0,
       counterYaxis = 0;
@@ -54,7 +54,7 @@ const writeToDB = async data => {
   try {
     const allCards = await controllers.card.findAll(db, filter);
 
-    allCards.forEach(card => {
+    for (const card of allCards) {
       const newPosition = {
         id: card.id,
         position: {
@@ -64,14 +64,16 @@ const writeToDB = async data => {
         selectedDoW
       };
 
-      controllers.card.setXy(db, newPosition);
+      await controllers.card.setXy(db, newPosition);
 
       counterXaxis += 1;
       if (counterXaxis === maxCardsinXaxis) {
         counterXaxis = 0;
         counterYaxis += 1;
       }
-    });
+    }
+
+    return room;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error.message);
@@ -79,10 +81,18 @@ const writeToDB = async data => {
 };
 
 const resetCards = async (data, callback) => {
-  await writeToDB(data);
-  const resetPosition = await getCardsAfterReset(data);
+  let resetPosition = {};
 
-  callback(resetPosition);
+  try {
+    const room = await writeToDB(data);
+
+    resetPosition = await getCardsAfterReset(room);
+
+    return callback(resetPosition);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error.message);
+  }
 };
 
 module.exports = resetCards;

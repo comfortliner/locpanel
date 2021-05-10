@@ -9,6 +9,8 @@ CREATE TABLE tblLOCPANEL_rooms (
     [id] [int] IDENTITY(1,1) PRIMARY KEY CLUSTERED NOT NULL,
     [name] [nvarchar](50) NOT NULL,
     [columns] [nvarchar](255) NOT NULL,
+    [panelmode] [nvarchar](20) NOT NULL,
+    [boardwidth] [int] NOT NULL,
     INDEX idx_tblLOCPANEL_rooms_name ( [name] )
 )
 GO
@@ -62,7 +64,7 @@ GO
 
 
 /* SEEDS */
-INSERT INTO tblLOCPANEL_rooms ([name], [columns]) VALUES ('/abcdef', 'Location 1, Location 2, Location 3, Out of Order');
+INSERT INTO tblLOCPANEL_rooms ([name], [columns], [panelmode], [boardwidth]) VALUES ('/abcdef', 'Location 1, Location 2, Location 3, Out of Order', 'SINGLE', 1280);
 
 INSERT INTO tblLOCPANEL_cards ([extidroom], [idUser], [text], [x1], [y1], [rot], [colour]) VALUES (1, '1234', '<b>1234</b>', 250.0, 250.0, -1, 'yellow');
 INSERT INTO tblLOCPANEL_cards ([extidroom], [idUser], [text], [x1], [y1], [rot], [colour]) VALUES (1, '2345', '<b>2345</b>', 300.0, 300.0, 0, 'white');

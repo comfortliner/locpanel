@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'false'
     },
-    KID: {
+    idUser: {
       field: 'idUser',
       type: DataTypes.STRING,
       allowNull: false

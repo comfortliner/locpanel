@@ -44,11 +44,13 @@ const setXy = async (db, data) => {
         key2 = `y${selectedDoW}`;
 
   try {
-    await db.Card.update({ [key1]: left, [key2]: top }, {
+    const result = await db.Card.update({ [key1]: left, [key2]: top }, {
       where: {
         id
       }
     });
+
+    return result;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(`${new Date().toISOString()} Something went wrong in card.setXy. ${JSON.stringify(error.message)}`);

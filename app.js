@@ -3,6 +3,7 @@
 const http = require('http');
 
 const getApp = require('./getApp'),
+      { initializeJobs } = require('./cronJobs'),
       socketio = require('./socketio');
 
 const app = getApp();
@@ -11,7 +12,9 @@ const { NODE_ENV, PORT } = process.env;
 
 const server = http.createServer(app);
 
-socketio(server);
+const io = socketio(server);
+
+initializeJobs(io);
 
 server.listen(PORT, () => {
   // eslint-disable-next-line no-console

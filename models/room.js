@@ -17,6 +17,16 @@ module.exports = (sequelize, DataTypes) => {
       field: 'columns',
       type: DataTypes.STRING,
       allowNull: false
+    },
+    panelmode: {
+      field: 'panelmode',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    boardwidth: {
+      field: 'boardwidth',
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     freezeTableName: true,
