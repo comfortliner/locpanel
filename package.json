@@ -1,7 +1,7 @@
 {
   "name": "locpanel",
   "version": "0.0.1",
-  "description": "Forked from aliasaria/scrumblr. Used as a magnet board for showing the presence status (locationpanel).",
+  "description": "Inspired from aliasaria/scrumblr. Used as a magnet board for showing the presence status (locationpanel).",
   "main": "app.js",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=DEVELOPMENT DEBUG=app*,sequelize:sql* nodemon -r dotenv/config app.js",
