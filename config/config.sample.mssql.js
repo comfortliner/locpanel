@@ -2,35 +2,47 @@
 
 module.exports = {
   development: {
+    dialect: 'mssql',
     username: 'YOUR-USERNAME',
     password: 'YOUR-PASSWORD',
+    host: 'YOUR-HOST-NAME',
     database: 'YOUR-DATABASE-NAME',
-    dialect: 'mssql',
+    port: 1433,
     dialectOptions: {
-      server: 'YOUR-HOST-NAME',
-      options: {}
+      options: {
+        instanceName: 'YOUR-INSTANCE-NAME',
+        trustedConnection: true
+      }
     },
     logging: console.log
   },
   test: {
-    username: '',
-    password: '',
-    database: '',
     dialect: 'mssql',
+    username: 'YOUR-USERNAME',
+    password: 'YOUR-PASSWORD',
+    host: 'YOUR-HOST-NAME',
+    database: 'YOUR-DATABASE-NAME',
+    port: 1433,
     dialectOptions: {
-      server: '',
-      options: {}
+      options: {
+        instanceName: 'YOUR-INSTANCE-NAME',
+        trustedConnection: true
+      }
     },
     logging: console.log
   },
   production: {
-    username: '',
-    password: '',
-    database: '',
     dialect: 'mssql',
+    username: 'YOUR-USERNAME',
+    password: 'YOUR-PASSWORD',
+    host: 'YOUR-HOST-NAME',
+    database: 'YOUR-DATABASE-NAME',
+    port: 1433,
     dialectOptions: {
-      server: '',
-      options: {}
+      options: {
+        instanceName: 'YOUR-INSTANCE-NAME',
+        trustedConnection: true
+      }
     },
     logging: false
   }
