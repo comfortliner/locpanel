@@ -45,11 +45,15 @@ const writeToDB = async data => {
           },
           raw: true
         },
-        maxCardsinXaxis = Math.round((boardwidth / colcount) / 80),
         offsetLeft = ((boardwidth / colcount) * (colcount - 1)) - 30;
 
   let counterXaxis = 0,
-      counterYaxis = 0;
+      counterYaxis = 0,
+      maxCardsinXaxis = Math.round((boardwidth / colcount) / 80);
+
+  if (maxCardsinXaxis < 3) {
+    maxCardsinXaxis = 3;
+  }
 
   try {
     const allCards = await controllers.card.findAll(db, filter);
