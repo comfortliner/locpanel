@@ -68,6 +68,8 @@ GO
 ALTER TABLE tblLOCPANEL_cards ADD CONSTRAINT [DF_tblLOCPANEL_cards_colour] DEFAULT (('white')) FOR [colour];
 GO
 
+CREATE UNIQUE NONCLUSTERED INDEX UIX_tblLOCPANEL_cards_extidroom_idUser ON tblLOCPANEL_cards(extidroom, idUser);
+GO
 
 /* SEEDS */
 INSERT INTO tblLOCPANEL_rooms ([name], [columns], [panelmode], [boardwidth]) VALUES ('/abcdef', 'Location 1, Location 2, Location 3, Out of Order', 'SINGLE', 1280);

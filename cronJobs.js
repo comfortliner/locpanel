@@ -44,12 +44,17 @@ const doResetCards = async io => {
         selectedDoW
       };
 
-      resetCards(data, result => {
-        // report to all clients in this room
-        io.in(data.room).emit('message', { action: 'initCards', data: result });
-      });
-      // eslint-disable-next-line no-console
-      console.log(`${new Date().toISOString()} Cronjob: Cards resetted in ${data.room}, selectedDoW ${data.selectedDoW}, panelmode ${panelmode}.`);
+      if (selectedDoW >= 1 && selectedDoW <= 5) {
+        resetCards(data, result => {
+          // report to all clients in this room
+          io.in(data.room).emit('message', { action: 'initCards', data: result });
+        });
+        // eslint-disable-next-line no-console
+        console.log(`${new Date().toISOString()} Cronjob: Cards resetted in ${data.room}, selectedDoW ${data.selectedDoW}, panelmode ${panelmode}.`);
+      } else {
+        // eslint-disable-next-line no-console
+        console.log(`${new Date().toISOString()} Cronjob: Cards reset suspend in ${data.room}, panelmode ${panelmode} because it is weekend.`);
+      }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -58,8 +63,8 @@ const doResetCards = async io => {
 };
 
 const initializeJobs = io => {
-  // Five minutes to midnight
-  const job1 = new CronJob('00 55 23 * * *', () => {
+  // Two minutes to midnight (the hands that threaten doom) ;-)
+  const job1 = new CronJob('00 58 23 * * *', () => {
     doResetCards(io);
   }, null, true, 'Europe/Berlin');
 

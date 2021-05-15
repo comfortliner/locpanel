@@ -4,8 +4,6 @@ let boardInitialized = false,
     keyTrap = null,
     totalcolumns = 0;
 
-const baseurl = location.pathname;
-
 const getQueryStringValue = key => decodeURIComponent(window.location.search.replace(
   // eslint-disable-next-line require-unicode-regexp, prefer-template, unicorn/better-regex, no-useless-escape
   new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'
@@ -31,7 +29,7 @@ const socket = io.connect();
 
 const sendAction = (action, data) => {
   const defaultKeyValue = {
-    room: baseurl,
+    room: `/${location.pathname.split('/').pop()}`,
     boardwidth: $('.board-outline').width(),
     colcount: $('.col').length,
     selectedDoW: getSelectedDoW()
@@ -105,7 +103,7 @@ $(document).bind('keyup', event => {
 const drawNewCard = (id, text, x, y, rot, colour, animationspeed) => {
   const html = `
       <div id="${id}" class="card ${colour} draggable" style="-webkit-transform:rotate(${rot}deg);">
-        <img class="card-image" src="images/${colour}-card.png">
+        <img class="card-image" src="../images/${colour}-card.png">
         <div id="content:${id}" class="content stickertarget droppable">${text}</div>
         <span class="filler"></span>
       </div>
@@ -186,15 +184,17 @@ const initCards = cardArray => {
     if (Object.prototype.hasOwnProperty.call(cardArray, card)) {
       const newCard = cardArray[card];
 
-      drawNewCard(
-        newCard.id,
-        newCard.text,
-        selectedDoW === 1 ? newCard.x1 : selectedDoW === 2 ? newCard.x2 : selectedDoW === 3 ? newCard.x3 : selectedDoW === 4 ? newCard.x4 : selectedDoW === 5 ? newCard.x5 : newCard.x1,
-        selectedDoW === 1 ? newCard.y1 : selectedDoW === 2 ? newCard.y2 : selectedDoW === 3 ? newCard.y3 : selectedDoW === 4 ? newCard.y4 : selectedDoW === 5 ? newCard.y5 : newCard.y1,
-        newCard.rot,
-        newCard.colour,
-        250
-      );
+      if (selectedDoW >= 1 && selectedDoW <= 5) {
+        drawNewCard(
+          newCard.id,
+          newCard.text,
+          selectedDoW === 1 ? newCard.x1 : selectedDoW === 2 ? newCard.x2 : selectedDoW === 3 ? newCard.x3 : selectedDoW === 4 ? newCard.x4 : selectedDoW === 5 ? newCard.x5 : newCard.x1,
+          selectedDoW === 1 ? newCard.y1 : selectedDoW === 2 ? newCard.y2 : selectedDoW === 3 ? newCard.y3 : selectedDoW === 4 ? newCard.y4 : selectedDoW === 5 ? newCard.y5 : newCard.y1,
+          newCard.rot,
+          newCard.colour,
+          250
+        );
+      }
     }
   }
 
@@ -345,7 +345,7 @@ socket.on('message', message => {
 
 $(() => {
   if (boardInitialized === false) {
-    blockUI('<img src="images/ajax-loader.gif" width=43 height=11/>');
+    blockUI('<img src="../images/ajax-loader.gif" width=43 height=11/>');
   }
 
   $('#resetCards').

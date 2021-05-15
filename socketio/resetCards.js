@@ -76,7 +76,7 @@ const writeToDB = async data => {
     return room;
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(error.message);
+    console.log(`${new Date().toISOString()} Something went wrong in resetCards.writeToDB. ${JSON.stringify(error.message)}`);
   }
 };
 
@@ -91,7 +91,7 @@ const resetCards = async (data, callback) => {
     return callback(resetPosition);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(error.message);
+    console.log(`${new Date().toISOString()} Something went wrong in resetCards.resetCards. ${JSON.stringify(error.message)}`);
   }
 };
 

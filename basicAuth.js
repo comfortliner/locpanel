@@ -5,7 +5,7 @@ const controllers = require('./controllers'),
 
 const getAllCards = async room => {
   const filter = {
-    attributes: [ 'KID' ],
+    attributes: [ 'idUser' ],
     include: [{
       model: db.Room,
       attributes: [ 'name' ],
@@ -45,8 +45,8 @@ const hasCardOnLocpanel = async (req, res, next) => {
   return next();
 
   // eslint-disable-next-line no-unreachable
-  const allCards = await getAllCards(`/${req.params.id}`);
-  const UserhasCard = allCards.some(items => items.KID === req.user);
+  const allCards = await getAllCards(`/${req.params.room}`);
+  const UserhasCard = allCards.some(items => items.idUser === req.user);
 
   if (!UserhasCard) {
     res.status(401);

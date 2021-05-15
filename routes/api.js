@@ -4,11 +4,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const controllers = require('../controllers'),
-      db = require('../models');
+// const controllers = require('../controllers'),
+//       db = require('../models');
 
-router.get('/rooms', controllers.room.getRooms(db));
-router.get('/cards', controllers.card.getCards(db));
+// router.get('/rooms', controllers.room.getRooms(db));
+// router.get('/cards', controllers.card.getCards(db));
 
 // router.get('/albums/:id?', controllers.album.getAlbums(db));
 

@@ -6,14 +6,11 @@ const compression = require('compression'),
       cors = require('cors'),
       express = require('express');
 
-const { authUser, hasCardOnLocpanel } = require('./basicAuth'),
-      { getarrDoW } = require('./utils');
-
-// const routes = require('./routes');
+const routes = require('./routes');
 
 const setUser = (req, res, next) => {
   // eslint-disable-next-line no-param-reassign
-  req.user = 'P3622';
+  req.user = 'logged on idUser';
 
   next();
 };
@@ -34,39 +31,10 @@ const getApp = function () {
 
   app.use(compression());
 
+  app.use('/room', routes.room);
+
   app.get('/', (req, res) => {
-    res.send('Homepage locpanel<br><br>tbd...');
-  });
-
-  // app.use('/api', routes.api);
-
-  app.get('/:id', authUser, hasCardOnLocpanel, (req, res) => {
-    const pageLocals = {};
-
-    let { selectedDoW } = req.query,
-        { PANELMODE } = process.env || 'SINGLE',
-        { NODE_ENV } = process.env;
-
-    PANELMODE = PANELMODE.toUpperCase();
-    NODE_ENV = NODE_ENV.toUpperCase();
-
-    if (PANELMODE === 'SINGLE') {
-      selectedDoW = 1;
-    }
-
-    if (PANELMODE === 'MULTI' &&
-       (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5)) {
-      selectedDoW = new Date().getDay();
-    }
-
-    pageLocals.pageTitle = `locpanel - ${req.params.id}`;
-    pageLocals.room = req.params.id;
-    pageLocals.selectedDoW = selectedDoW;
-    pageLocals.getarrDoW = getarrDoW;
-    pageLocals.panelMode = PANELMODE;
-    pageLocals.env = NODE_ENV;
-
-    res.render('index', pageLocals);
+    res.send('Landingpage locpanel<br><br>tbd...');
   });
 
   return app;
