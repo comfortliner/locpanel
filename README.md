@@ -6,35 +6,47 @@ It was inspired by [scrumblr from aliasaria](https://github.com/aliasaria/scrumb
 
 Some other functions have been added
 
-* sqlite or mssql as database
-* UI in read only mode. All boards, labeling and cards are specified via an admin area.
-* (todo) frontend separated from backend
-* (todo) admin area for backend
+* Replace MongoDB with sqlite or MSSQL as database.
+* Daily reset of the cards into 'HOME' area.
+* Single, or Multipanel-Mode (see image) to plan the future days.
 * (todo) User authentication and authorization. Only users with card can access the board.
+* (todo) UI in read only mode. All boards, labeling and cards are specified via an admin area.
 
+![locpanel Image](./locpanel.png)
 
 ## Getting Started
-Copy `.env` file from sample file, then edit the properties to your needs.
+### Configuration
+Create `.env` file and edit it to your needs.
 ```shell
 cp .env.sample .env
 ```
 
-As database you can use `sqlite` or `mssql`.
-You can use sqlite with the sample databasefile `locpanel.sqlite` from scratch.
-
-You have to install the following node module, if you want to use mssql instead.
+Create `./config/config.js` file and edit it to your needs.
 ```shell
-npm install tedious@11.0.7 --save-exact
+cd ./config
+
+cp .config.sample.sqlite.js config.js
+or
+cp .config.sample.mssql.js config.js
 ```
 
+With `locpanel.sqlite` you can use a sqlite database from scratch.
+
+Use `./config/db.sql` as schema import file, if you want to use MSSQL as backend.
+
+### Installation
 
 Install node modules
 ```shell
 npm install
 ```
 
-Run server in development or production mode
+Run server in development mode
 ```shell
 npm run start:dev
+```
+
+Run server in production mode
+```shell
 npm run start
 ```
