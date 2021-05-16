@@ -32,7 +32,7 @@ const callRoom = async (req, res) => {
   const { room } = req.params;
 
   let { selectedDoW } = req.query,
-      { NODE_ENV } = process.env,
+      { NODE_ENV, SOCKETIO_SERVER_PATH } = process.env,
       { panelmode } = await getPanelMode({ room: `/${room}` });
 
   NODE_ENV = NODE_ENV.toUpperCase();
@@ -47,12 +47,17 @@ const callRoom = async (req, res) => {
     selectedDoW = new Date().getDay();
   }
 
+  if (typeof SOCKETIO_SERVER_PATH === 'undefined') {
+    SOCKETIO_SERVER_PATH = '/Socket.io';
+  }
+
   pageLocals.pageTitle = `locpanel - ${room}`;
   pageLocals.room = room;
   pageLocals.selectedDoW = selectedDoW;
   pageLocals.getarrDoW = getarrDoW;
   pageLocals.panelMode = panelmode;
   pageLocals.env = NODE_ENV;
+  pageLocals.socketio_server_path = SOCKETIO_SERVER_PATH;
 
   res.render('room', pageLocals);
 };
