@@ -23,15 +23,15 @@ html(lang="en")
     //<script src="socketio/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 
-    <!-- ** My Script ** -->
-    <script src="../script.js"></script>
-
-
     title= locals.pageTitle
 
     script.
       const panelMode = '#{locals.panelMode}';
       const env = '#{locals.env}';
+      const socketioServerPath = '#{locals.socketioServerPath}';
+
+    <!-- ** My Script ** -->
+    <script src="../script.js"></script>
 
   body
     block body

@@ -8,7 +8,7 @@ const getApp = require('./getApp'),
 
 const app = getApp();
 
-const { NODE_ENV, PORT } = process.env;
+const { NODE_ENV, PORT = 3000 } = process.env;
 
 const server = http.createServer(app);
 

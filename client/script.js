@@ -25,7 +25,7 @@ const getSelectedDoW = () => {
 };
 
 // eslint-disable-next-line no-undef
-const socket = io.connect({ path: socketio_server_path });
+const socket = io.connect({'path': socketioServerPath});
 
 const sendAction = (action, data) => {
   const defaultKeyValue = {

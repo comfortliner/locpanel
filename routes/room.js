@@ -32,32 +32,36 @@ const callRoom = async (req, res) => {
   const { room } = req.params;
 
   let { selectedDoW } = req.query,
-      { NODE_ENV, SOCKETIO_SERVER_PATH } = process.env,
-      { panelmode } = await getPanelMode({ room: `/${room}` });
+      { NODE_ENV, SOCKETIO_SERVER_PATH } = process.env;
 
   NODE_ENV = NODE_ENV.toUpperCase();
-  panelmode = panelmode.toUpperCase();
-
-  if (panelmode === 'SINGLE') {
-    selectedDoW = 1;
-  }
-
-  if (panelmode === 'MULTI' &&
-     (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5)) {
-    selectedDoW = new Date().getDay();
-  }
 
   if (typeof SOCKETIO_SERVER_PATH === 'undefined') {
-    SOCKETIO_SERVER_PATH = '/Socket.io';
+    SOCKETIO_SERVER_PATH = '/socket.io';
+  }
+
+  try {
+    let { panelmode } = await getPanelMode({ room: `/${room}` });
+    panelmode = panelmode.toUpperCase();
+    pageLocals.panelMode = panelmode;
+
+    if (panelmode === 'SINGLE') {
+      selectedDoW = 1;
+    }
+  
+    if (panelmode === 'MULTI' &&
+       (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5)) {
+      selectedDoW = new Date().getDay();
+    }
+  } catch(err) {
   }
 
   pageLocals.pageTitle = `locpanel - ${room}`;
   pageLocals.room = room;
   pageLocals.selectedDoW = selectedDoW;
   pageLocals.getarrDoW = getarrDoW;
-  pageLocals.panelMode = panelmode;
   pageLocals.env = NODE_ENV;
-  pageLocals.socketio_server_path = SOCKETIO_SERVER_PATH;
+  pageLocals.socketioServerPath = SOCKETIO_SERVER_PATH;
 
   res.render('room', pageLocals);
 };
