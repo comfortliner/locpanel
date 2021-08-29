@@ -27,7 +27,7 @@ CREATE TABLE tblLOCPANEL_cards (
     [extidroom] [int] NOT NULL,
     [isActive] [bit] NOT NULL,
     [isAdmin] [bit] NOT NULL,
-    [idUser] [nvarchar](20) NOT NULL,
+    [idUser] [nvarchar](36) NOT NULL,
     [text] [nvarchar](255),
     [x1] [real] NOT NULL,
     [y1] [real] NOT NULL,
