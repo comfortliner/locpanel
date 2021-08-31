@@ -42,18 +42,20 @@ const callRoom = async (req, res) => {
 
   try {
     let { panelmode } = await getPanelMode({ room: `/${room}` });
+
     panelmode = panelmode.toUpperCase();
     pageLocals.panelMode = panelmode;
 
     if (panelmode === 'SINGLE') {
       selectedDoW = 1;
     }
-  
+
     if (panelmode === 'MULTI' &&
        (typeof selectedDoW === 'undefined' || Number.isNaN(selectedDoW) || Number.parseInt(selectedDoW, 10) < 1 || Number.parseInt(selectedDoW, 10) > 5)) {
       selectedDoW = new Date().getDay();
     }
-  } catch(err) {
+  // eslint-disable-next-line no-empty
+  } catch {
   }
 
   pageLocals.pageTitle = `locpanel - ${room}`;

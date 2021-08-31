@@ -31,6 +31,10 @@ const getApp = function () {
 
   app.use(compression());
 
+  app.use('/api', routes.api);
+
+  app.use('/reactAdmin', routes.reactAdmin);
+
   app.use('/room', routes.room);
 
   app.get('/', (req, res) => {

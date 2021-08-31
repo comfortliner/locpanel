@@ -1,0 +1,23 @@
+### rooms
+
+### All rooms
+GET http://localhost:3000/reactadmin/rooms?sort=["name","ASC"]&filter={"name":"/ihd"}
+
+### Single room
+GET http://localhost:3000/reactadmin/rooms/1
+
+### Create room
+POST http://localhost:3000/reactadmin/rooms
+Content-Type: application/json
+
+{
+  "name": "/room",
+  "columns": "col1,col2,col3"
+}
+
+### Delete room
+DELETE http://localhost:3000/reactadmin/rooms/8
+
+
+
+### cards

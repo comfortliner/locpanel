@@ -1,24 +1,36 @@
 'use strict';
 
-const express = require('express');
+const express = require('express'),
+      swaggerJsDoc = require('swagger-jsdoc'),
+      swaggerUi = require('swagger-ui-express');
 
 const router = express.Router();
 
-// const controllers = require('../controllers'),
-//       db = require('../models');
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      version: '1.0.0',
+      title: 'locpanel React-Admin API',
+      description: 'Documentation of the locpanel React-Admin API',
+      contact: {
+        name: 'comfortliner',
+        url: 'https://github.com/comfortliner/locpanel'
+      },
+      servers: [
+        {
+          url: 'http://localhost:3000',
+          description: 'server'
+        }
+      ]
+    }
+  },
 
-// router.get('/rooms', controllers.room.getRooms(db));
-// router.get('/cards', controllers.card.getCards(db));
+  apis: [ './routes/*.js' ]
+};
 
-// router.get('/albums/:id?', controllers.album.getAlbums(db));
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// router.get('/artists', controllers.artist.getArtists(db));
-// router.get('/artists/:id', controllers.artist.getSingleArtist(db));
-
-// router.get('/playlists', controllers.playlist.getPlaylists(db));
-// router.get('/playlists/:id', controllers.playlist.getSinglePlaylist(db));
-
-// router.get('/tracks', controllers.track.getTracks(db));
-// router.get('/tracks/:id', controllers.track.getSingleTrack(db));
+router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 module.exports = router;

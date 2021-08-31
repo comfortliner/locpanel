@@ -21,6 +21,8 @@
     "sequelize": "5.22.3",
     "socket.io": "4.0.1",
     "sqlite3": "5.0.2",
+    "swagger-jsdoc": "6.1.0",
+    "swagger-ui-express": "4.1.6",
     "tedious": "11.0.7"
   },
   "devDependencies": {
