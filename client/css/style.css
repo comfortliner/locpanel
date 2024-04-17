@@ -23,14 +23,30 @@ body {
   background-image: url('bg/concrete_wall_2_2.png');
 }
 
+.avatar {
+  position: absolute;
+  bottom: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  opacity: 0.45;
+  z-index: -1;
+}
+
+.pictogramm {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
 .site-header {
   position: relative;
-  background-color: none; 
+  background-color: none;
 }
 
 .site-header__wrapper {
   padding-top: 1rem;
-  padding-bottom: 1rem; 
+  padding-bottom: 1rem;
 }
 
 .site-header__wrapper {
