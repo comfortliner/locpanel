@@ -1,8 +1,7 @@
 'use strict';
 
 let boardInitialized = false,
-    keyTrap = null,
-    totalcolumns = 0;
+    keyTrap = null;
 
 const getQueryStringValue = key => decodeURIComponent(window.location.search.replace(
   // eslint-disable-next-line require-unicode-regexp, prefer-template, unicorn/better-regex, no-useless-escape
@@ -31,7 +30,7 @@ const sendAction = (action, data) => {
   const defaultKeyValue = {
     room: `/${location.pathname.split('/').pop()}`,
     boardwidth: $('.board-outline').width(),
-    colcount: $('.col').length,
+    colcount: $('.col').length / $('.col.first').length,
     selectedDoW: getSelectedDoW()
   };
 
@@ -205,35 +204,32 @@ const initCards = cardArray => {
 // ******************* columns ********************
 // ************************************************
 
-const drawNewColumn = columnName => {
-  let cls = 'col';
+const drawNewColumn = data => {
+  let cls = '';
 
-  if (totalcolumns === 0) {
-    cls = 'col first';
-  }
+  // eslint-disable-next-line no-unused-expressions
+  data.col === '0' ? cls = 'col first' : cls = 'col';
 
-  $('#icon-col').before(`
+  $(`#icon-col${data.row}`).before(`
     <td class="${cls}" width="10%" style="display:none">
-      <h2 id="col-${totalcolumns + 1}" class="editable">${columnName}</h2>
+      <h2 id="col-${data.row}${data.col}" class="editable">${data.columnHeadline}</h2>
     </td>`);
 
   $('.col:last').fadeIn(1500);
-
-  totalcolumns += 1;
 };
 
-const initColumns = columnArray => {
-  totalcolumns = 0;
-
-  // columns = columnArray;
-
+const initColumns = data => {
   $('.col').remove();
 
-  for (const column in columnArray) {
-    if (Object.prototype.hasOwnProperty.call(columnArray, column)) {
-      const newcolumn = columnArray[column];
+  for (const row in data.columnHeadlines) {
+    if (Object.prototype.hasOwnProperty.call(data.columnHeadlines, row)) {
+      for (const col in data.columnHeadlines[row]) {
+        if (Object.prototype.hasOwnProperty.call(data.columnHeadlines[row], col)) {
+          const columnHeadline = data.columnHeadlines[row][col];
 
-      drawNewColumn(newcolumn);
+          drawNewColumn({ row, col, columnHeadline });
+        }
+      }
     }
   }
 };

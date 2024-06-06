@@ -23,6 +23,11 @@ body {
   background-image: url('bg/concrete_wall_2_2.png');
 }
 
+@font-face{
+  font-family: "Rock_Salt";
+  src: url("../fonts/Rock_Salt/RockSalt-Regular.ttf") format("truetype");
+}
+
 .avatar {
   position: absolute;
   bottom: 0;
@@ -115,7 +120,6 @@ body {
 .board-table .col{
   text-align: center;
   vertical-align: top;
-  height: 60%;
   background-image: url('../images/green-board-line.png');
   background-repeat: repeat-y;
   background-position: left top;
@@ -125,8 +129,7 @@ body {
   border-left: none;
   text-align: center;
   vertical-align: top;
-  height: 60%;
-  background-image: url('../images/green-board-line.png');
+  background-image: none;
 }
 
 h1, h1 a {
@@ -143,7 +146,7 @@ h1, h1 a {
 }
 
 h2 {
-  font-family: 'Rock Salt', "Arial Rounded MT Bold", arial, serif;
+  font-family: 'Rock_Salt', "Arial Rounded MT Bold", arial, serif;
   color: #5c9db4;
   font-size: 18px;
   padding-top: 14px;

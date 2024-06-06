@@ -39,9 +39,11 @@ const getInitColumns = async data => {
 
   try {
     const { columns } = await controllers.room.findOne(db, filter);
-    const result = columns.split(',').map(value => value.trim());
+    const columnHeadlines = columns.split('\\n').map(value => value.trim().split(','));
 
-    return result;
+    return {
+      columnHeadlines
+    };
   } catch {
     return {};
   }

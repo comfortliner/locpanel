@@ -3,6 +3,7 @@ extends layout
 block body
   - let arrDoW = locals.getarrDoW();
   - let actualDoW = new Date().getDay();
+  - let numberOfRows = 10;
 
   header.site-header
     div.site-header__wrapper
@@ -50,7 +51,8 @@ block body
         image#eraser(src='../images/eraser.png')
 
         table#board-table.board-table
-          tr
-            td#icon-col(width='1%')
+          - for (let x = 0; x < numberOfRows; x++)
+            tr
+              td(id='icon-col'+x, width='1%')
   //- div
   //-  button#resetCards Reset cards on this board

@@ -29,7 +29,7 @@ const doResetCards = async io => {
       const { name, columns, panelmode } = room;
       let { boardwidth } = room;
 
-      const colcount = typeof columns === 'undefined' || columns === null ? 1 : columns.split(',').length;
+      const colcount = typeof columns === 'undefined' || columns === null ? 1 : columns.split('\\n')[0].split(',').length;
 
       const selectedDoW = typeof panelmode === 'undefined' || panelmode === null || panelmode.toUpperCase() === 'SINGLE' ? 1 : new Date().getDay();
 

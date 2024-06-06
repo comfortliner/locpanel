@@ -1,6 +1,6 @@
 {
   "name": "locpanel",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Inspired from aliasaria/scrumblr. Used as a magnet board for showing the presence status (locationpanel).",
   "main": "app.js",
   "scripts": {
